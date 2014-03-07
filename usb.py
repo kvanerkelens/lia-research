@@ -24,6 +24,7 @@ if os == 'Linux':
 				 serial = re.findall(r'SerialNumber:.*',line)
 				 usb_found = "True"
 #      				 serial = line
+#				 print line
 	   		if "Product:" in line:
 				 product = re.findall(r'Product:.*',line)
 #       				 product = line
@@ -44,9 +45,9 @@ if usb_found == 'True':
 	print socket.getfqdn(socket.getfqdn())
 	print getpass.getuser()
 	username = getpass.getuser()
-	print serial
-	print product
-	print manufactur
+	print serial[0]
+	print product[0]
+	print manufactur[0]
 	db = MySQLdb.connect(host="localhost", # your host, usually localhost
                      user="adduser", # your username
                       passwd="Dhct3XQeBsDqKwcm", # your password
@@ -54,14 +55,12 @@ if usb_found == 'True':
 	cursor = db.cursor()
 
 
-	for line in serial:
-		print serial
 	
-	serial = "e"
-	product = "d"
-	manufactur = "a"
+#	serial = "e"
+#	product = "d"
+#	manufactur = "a"
 
-	sql = "INSERT INTO usbinv (user, vendorname, type, serialnumber, os) VALUES('%s', '%s', '%s', '%s', '%s')"%(username,manufactur,product,serial,os)
+	sql = "INSERT INTO usbinv (user, vendorname, type, serialnumber, os) VALUES('%s', '%s', '%s', '%s', '%s')"%(username,manufactur[0],product[0],serial[0],os)
 	print sql
 	cursor.execute(sql)
 	db.commit()
