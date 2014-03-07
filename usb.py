@@ -48,9 +48,9 @@ if usb_found == 'True':
 	print serial[0]
 	print product[0]
 	print manufactur[0]
-	db = MySQLdb.connect(host="localhost", # your host, usually localhost
-                     user="adduser", # your username
-                      passwd="Dhct3XQeBsDqKwcm", # your password
+	db = MySQLdb.connect(host="145.100.104.168", # your host, usually localhost
+                     user="workstation", # your username
+                      passwd="AxjHFqWSdzuYVSaJ", # your password
                       db="usbinv") # name of the data base
 	cursor = db.cursor()
 
