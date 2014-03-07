@@ -1,3 +1,4 @@
+#!/usr/bin/python
 import getpass
 import socket
 import platform
@@ -52,12 +53,15 @@ if usb_found == 'True':
                       db="usbinv") # name of the data base
 	cursor = db.cursor()
 
+
+	for line in serial:
+		print serial
 	
 	serial = "e"
 	product = "d"
 	manufactur = "a"
 
-	sql = ("INSERT INTO usbinv (user, vendorname, type, serialnumber, os) VALUES(%s, %s, %s, %s, %s)",(username,manufactur,product,serial,os))	
+	sql = "INSERT INTO usbinv (user, vendorname, type, serialnumber, os) VALUES('%s', '%s', '%s', '%s', '%s')"%(username,manufactur,product,serial,os)
 	print sql
 	cursor.execute(sql)
 	db.commit()
