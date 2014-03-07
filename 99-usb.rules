@@ -1,0 +1,2 @@
+ACTION=="add",KERNEL=="sd*", SUBSYSTEMS=="usb", RUN+="/sne/home/ebijnen/lia-research/usb.py"
+
