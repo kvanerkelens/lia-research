@@ -1,50 +1,45 @@
-<!DOCTYPE html>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
 <html>
-<head>
-<style type="text/css" title="currentStyle">
-    @import "DataTables-1.9.4/media/css/demo_page.css";
-    @import "DataTables-1.9.4/media/css/demo_table.css";
-</style>
-<script type="text/javascript" charset="utf-8" src="DataTables-1.9.4/media/js/jquery.js"></script>
-<script type="text/javascript" charset="utf-8" src="DataTables-1.9.4/media/js/jquery.dataTables.js"></script>
-<script type="text/javascript">
-$(document).ready( function () {
-    $('#log').dataTable({
-		"bProcessing": true,
-		"bServerSide": true,
-		"sAjaxSource": "scripts/tables.php"
-	});
-} );
-</script>
-</head> 
-<body id="dt_example">
+	<head>
+		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+		
+		<title>DataTables Bootstrap 3 example</title>
 
-<div id="container">
-<div id="demo">
-<table id="log">
-    <thead>
-        <tr>
-		<th>Time</th>
-		<th>Vendor</th>
-		<th>Product</th>
-		<th>Serial number</th>
-		<th>User</th>
-		<th>Computer</th>
-		<th>OS</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td></td>
-            <td></td>
-        </tr>
-        <tr>
-            <td></td>
-            <td></td>
-        </tr>
-    </tbody>
+		<link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css">
+		<link rel="stylesheet" type="text/css" href="dataTables.bootstrap.css">
+
+		<script type="text/javascript" language="javascript" src="//code.jquery.com/jquery-1.10.2.min.js"></script>
+		<script type="text/javascript" language="javascript" src="//cdn.datatables.net/1.10-dev/js/jquery.dataTables.min.js"></script>
+		<script type="text/javascript" language="javascript" src="dataTables.bootstrap.js"></script>
+		<script type="text/javascript" charset="utf-8">
+			$(document).ready(function() {
+				$('#example').dataTable({
+					"bProcessing": true,
+                			"bServerSide": true,
+                			"sAjaxSource": "tables.php"
+				});
+			} );
+		</script>
+	</head>
+	<body>
+		<div class="container">
+			
+<table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered" id="example">
+	<thead>
+		<tr>
+			<th>Time</th>
+                	<th>Vendor</th>
+                	<th>Product</th>
+                	<th>Serial number</th>
+                	<th>User</th>
+                	<th>Computer</th>
+                	<th>OS</th>
+		</tr>
+	</thead>
+	<tbody>
+	</tbody>
 </table>
-</div>
-</div>
+			
+		</div>
+	</body>
 </html>
-
