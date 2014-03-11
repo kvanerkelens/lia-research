@@ -59,12 +59,23 @@ if usb_found == 'True':
                       db="usbinv") 
 	cursor = db.cursor()
 
-	
+#	test for occurence in status table
+	device_exists = False
+        sql_status = "SELECT EXISTS(SELECT serialnumber FROM status WHERE serialnumber='%s')"%(serial[0])	
+	print sql_status
+	cursor.execute(sql_status)
+	if cursor.fetchone()[0]:
+		device_exists = True
+
+# 	add the device to status table if it doesn't exists 
+	if device_exists == False:
+		sql_add_device = "INSERT INTO status (vendorname, type, serialnumber) VALUES('%s','%s', '%s')"%(manufactur[0],product[0],serial[0])
+		cursor.execute(sql_add_device)
 	sql = "INSERT INTO usbinv (computer,user, vendorname, type, serialnumber, os) VALUES('%s','%s', '%s', '%s', '%s', '%s')"%(computer,username,manufactur[0],product[0],serial[0],operatingsystem)
 	print sql
 #	cursor.execute(sql)
-#	db.commit()
-#	db.close()
+	db.commit()
+	db.close()
 	try:
 		os.remove(tmpfile)								#remove the file that shows the script is running
 	except:
