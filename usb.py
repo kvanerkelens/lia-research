@@ -10,7 +10,7 @@ import os
 import time
 operatingsystem = platform.system()
 usb_found = "False"
-tmpfile = "/tmp/usbrunning"
+tmpfile = "/etc/usbinv/usbrunning"
 
 
 if operatingsystem == 'Linux':
@@ -23,7 +23,7 @@ if operatingsystem == 'Linux':
 		file.close()
 
 
-	dmesg = subprocess.Popen(["/tmp/usb.sh"], stdout = subprocess.PIPE).communicate()[0]	#Compair dmesg and dmesg last time it ran.
+	dmesg = subprocess.Popen(["/etc/usbinv/usb.sh"], stdout = subprocess.PIPE).communicate()[0]	#Compair dmesg and dmesg last time it ran.
 	for line in dmesg.splitlines():
 
 		if "> [" in line: 								#get whats added to dmesg 
@@ -47,7 +47,7 @@ if operatingsystem == 'windows':								 # if windows then....
 
 if usb_found == 'True':
 	computer = socket.getfqdn(socket.getfqdn()) 						#get pcname
-        username = subprocess.Popen(["/tmp/who.sh"], stdout = subprocess.PIPE).communicate()[0] #get username out of who.sh
+        username = subprocess.Popen(["/etc/usbinv/who.sh"], stdout = subprocess.PIPE).communicate()[0] #get username out of who.sh
 #	print operatingsystem
 #	print computer
 #	print serial[0]
