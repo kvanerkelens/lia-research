@@ -1,2 +1,2 @@
-ACTION=="add",KERNEL=="sd*", SUBSYSTEMS=="usb", RUN+="/sne/home/ebijnen/lia-research/usb.py"
+ACTION=="add",KERNEL=="sd*", SUBSYSTEMS=="usb", RUN+="/etc/usbinv/usb.py"
 
