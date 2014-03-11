@@ -23,13 +23,13 @@ file.write("usbinventory is running\n")
 if operatingsystem == 'Linux':
 	file.write("operating system = linux\n")
 
-#	if os.path.isfile(tmpfile):
-#		print "already running"
-#		sys.exit(0)
-#	else:
-#		file = open("tmpfile", "w")
-#		file.write("usbinventory is running\n")
-#		file.close()
+	if os.path.isfile(tmpfile):
+		print "already running"
+		sys.exit(0)
+	else:
+		file = open("logfile", "w")
+		file.write("usbinventory is running\n")
+		file.close()
 
 
 	dmesg = subprocess.Popen(["/tmp/usb.sh"], stdout = subprocess.PIPE).communicate()[0]
@@ -48,7 +48,7 @@ if operatingsystem == 'Linux':
 		else:
 			usb_found = False
 
-#	time.sleep(2)
+	time.sleep(1)
 if operatingsystem == 'windows':
 	print "Windos"  
 	file.write("Windows found\n")
@@ -56,7 +56,7 @@ if operatingsystem == 'windows':
 
 
 if usb_found == 'True':
- 	file.write("USB found\n")
+# 	file.write("USB found\n")
 	print operatingsystem
 	computer = socket.getfqdn(socket.getfqdn())
 	print socket.getfqdn(socket.getfqdn())
@@ -79,9 +79,9 @@ if usb_found == 'True':
 	
 	sql = "INSERT INTO usbinv (computer,user, vendorname, type, serialnumber, os) VALUES('%s','%s', '%s', '%s', '%s', '%s')"%(computer,username,manufactur[0],product[0],serial[0],operatingsystem)
 	print sql
-	cursor.execute(sql)
-	db.commit()
-	db.close()
+#	cursor.execute(sql)
+#	db.commit()
+#	db.close()
 	try:
 		os.remove(tmpfile)
 	except:
