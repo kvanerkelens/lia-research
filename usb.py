@@ -10,7 +10,7 @@ import os
 import time
 operatingsystem = platform.system()
 usb_found = "False"
-tmpfile = "/etc/usbinv/usbrunning"
+tmpfile = "/tmp/usbrunning"
 
 
 if operatingsystem == 'Linux':
@@ -23,7 +23,7 @@ if operatingsystem == 'Linux':
 		file.close()
 
 
-	dmesg = subprocess.Popen(["/etc/usbinv/usb.sh"], stdout = subprocess.PIPE).communicate()[0]	#Compair dmesg and dmesg last time it ran.
+	dmesg = subprocess.Popen(["/tmp/usb.sh"], stdout = subprocess.PIPE).communicate()[0]	#Compair dmesg and dmesg last time it ran.
 	for line in dmesg.splitlines():
 
 		if "> [" in line: 								#get whats added to dmesg 
@@ -47,7 +47,7 @@ if operatingsystem == 'windows':								 # if windows then....
 
 if usb_found == 'True':
 	computer = socket.getfqdn(socket.getfqdn()) 						#get pcname
-        username = subprocess.Popen(["/etc/usbinv/who.sh"], stdout = subprocess.PIPE).communicate()[0] #get username out of who.sh
+        username = subprocess.Popen(["/tmp/who.sh"], stdout = subprocess.PIPE).communicate()[0] #get username out of who.sh
 #	print operatingsystem
 #	print computer
 #	print serial[0]
@@ -69,11 +69,11 @@ if usb_found == 'True':
 
 # 	add the device to status table if it doesn't exists 
 	if device_exists == False:
-		sql_add_device = "INSERT INTO status (vendorname, type, serialnumber) VALUES('%s','%s', '%s')"%(manufactur[0],product[0],serial[0])
+		sql_add_device = "INSERT INTO status (vendorname, type, serialnumber) VALUES('%s','%s','%s')"%(manufactur[0],product[0],serial[0])
 		cursor.execute(sql_add_device)
-	sql = "INSERT INTO usbinv (computer,user, vendorname, type, serialnumber, os) VALUES('%s','%s', '%s', '%s', '%s', '%s')"%(computer,username,manufactur[0],product[0],serial[0],operatingsystem)
+	sql = "INSERT INTO logevents (computer, user, serialnumber, os) VALUES('%s','%s','%s','%s')"%(computer,username,serial[0],operatingsystem)
 	print sql
-#	cursor.execute(sql)
+	cursor.execute(sql)
 	db.commit()
 	db.close()
 	try:
