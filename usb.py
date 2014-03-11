@@ -11,13 +11,13 @@ import time
 operatingsystem = platform.system()
 usb_found = "False"
 tmpfile = "/tmp/usbrunning"
-logfile = "/tmp/usbinv.log"
+#logfile = "/tmp/usbinv.log"
 
 
 
 
-file = open(logfile, "w")
-file.write("usbinventory is running\n")
+#file = open(logfile, "w")
+#file.write("usbinventory is running\n")
 
 
 if operatingsystem == 'Linux':
@@ -27,7 +27,7 @@ if operatingsystem == 'Linux':
 		print "already running"
 		sys.exit(0)
 	else:
-		file = open("logfile", "w")
+		file = open("tmpfile", "w")
 		file.write("usbinventory is running\n")
 		file.close()
 
@@ -38,20 +38,20 @@ if operatingsystem == 'Linux':
 		if "> [" in line:
 
     			if "SerialNumber:" in line:
-				serial = re.findall(r'SerialNumber:.*',line)
+				serial = re.findall(r'(?<=SerialNumber: ).*',line)
 				usb_found = "True"
 
 	   		if "Product:" in line:
-				product = re.findall(r'Product:.*',line)
+				product = re.findall(r'(?<=Product: ).*',line)
 	    		if "Manufacturer:" in line:
-				manufactur = re.findall(r'Manufacturer:.*',line)
+				manufactur = re.findall(r'(?<=Manufacturer: ).*',line)
 		else:
 			usb_found = False
 
 	time.sleep(1)
 if operatingsystem == 'windows':
 	print "Windos"  
-	file.write("Windows found\n")
+#	file.write("Windows found\n")
 
 
 
@@ -87,5 +87,5 @@ if usb_found == 'True':
 	except:
 		pass
 
-file.close()
+#file.close()
 
