@@ -13,38 +13,17 @@
 		<script type="text/javascript" language="javascript" src="dataTables.bootstrap.js"></script>
 		<script type="text/javascript" charset="utf-8">
 			$(document).ready(function() {
-				$('#lost').dataTable({
-                                        "bProcessing": true,
-                                        "bServerSide": true,
-                                        "sAjaxSource": "tables.php?show=lost"
-                                });
 				$('#example').dataTable({
 					"bProcessing": true,
                 			"bServerSide": true,
-                			"sAjaxSource": "tables.php?show=all"
+                			"sAjaxSource": "tables.php?sn=<?php echo $_GET['sn'] ?>"
 				});
 			} );
 		</script>
 	</head>
 	<body>
 		<div class="container">
-<h2>Lost Devices</h2>
-<table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered" id="lost">
-        <thead>
-                <tr>
-                        <th>Time</th>
-                        <th>Vendor</th>
-                        <th>Product</th>
-                        <th>Serial number</th>
-                        <th>User</th>
-                        <th>Computer</th>
-                        <th>OS</th>
-                </tr>
-        </thead>
-        <tbody>
-        </tbody>
-</table>
-<h2>All Events</h2>			
+<h2><?php echo $_GET['sn'] ?></h2>			
 <table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered" id="example">
 	<thead>
 		<tr>

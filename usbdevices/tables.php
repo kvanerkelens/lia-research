@@ -35,7 +35,14 @@ $input =& $_GET;
  * If you just want to use the basic configuration for DataTables with PHP server-side, there is
  * no need to edit below this line
  */
+
+$showTable = $_GET['show'];
+if($showTable == "lost") {
+	$sTable = 'lostdevices';
+}
  
+$input['sSearch'] = $_GET['sn'];
+
 /**
  * Character set to use for the MySQL connection.
  * MySQL will return all strings in this charset to PHP (if the data is stored correctly in the database).
@@ -161,9 +168,9 @@ $output = array(
 while ( $aRow = $rResult->fetch_assoc() ) {
     $row = array();
     for ( $i=0 ; $i<$iColumnCount ; $i++ ) {
-        if ( $aColumns[$i] == 'version' ) {
+        if ( $aColumns[$i] == 'serialnumber' ) {
             // Special output formatting for 'version' column
-            $row[] = ($aRow[ $aColumns[$i] ]=='0') ? '-' : $aRow[ $aColumns[$i] ];
+            $row[] = '<a href="device.php?sn='.$aRow[ $aColumns[$i] ].'">'.$aRow[ $aColumns[$i] ]."</a>"; // ($aRow[ $aColumns[$i] ]=='0') ? '-' : $aRow[ $aColumns[$i] ];
         } elseif ( $aColumns[$i] != ' ' ) {
             // General output
             $row[] = $aRow[ $aColumns[$i] ];
